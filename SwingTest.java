@@ -37,7 +37,7 @@ public class SwingTest extends JFrame{
     {"ブラジル", "1勝", "2敗", "1分"},
     {"オーストラリア", "2勝", "2敗", "0分"}};
 
-  private String[] columnNames = {"COUNTRY", "WIN", "LOST", "EVEN"};
+  private String[] columnNames = {"FILE", "ID"};
 
   public static void main(String[] args){
     SwingTest test = new SwingTest("SwingTest");
@@ -59,7 +59,8 @@ public class SwingTest extends JFrame{
 
     File[] files1 = dir.listFiles();
     
-    Object[][] contents = new Object[][];
+    Object[][] obj = new Object[files1.length][2];
+    
     for (int i = 0; i < files1.length; i++) {
     	/*
        File file = files1[i];
@@ -71,12 +72,15 @@ public class SwingTest extends JFrame{
            System.out.println(file);
         }
         */
-    	contents[i] = new TableContents(files1[i], i);
+
+    	obj[i][0] = i;
+    	obj[i][1] = files1[i];
+
     }
-    JTable table = new JTable(contents, columnNames);
+    JTable table = new JTable(obj, columnNames);
 
     JScrollPane sp = new JScrollPane(table);
-    sp.setPreferredSize(new Dimension(250, 70));
+    sp.setPreferredSize(new Dimension(800, 70));
 
     JPanel p = new JPanel();
     p.add(sp);
